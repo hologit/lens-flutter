@@ -1,0 +1,13 @@
+#!/bin/bash -e
+
+echo "executing flutter in a subshell"
+(
+    export PUB_CACHE="${GIT_WORK_TREE}.pub-cache"
+
+    # mask lens git env
+    unset -v GIT_DIR;
+    unset -v GIT_WORK_TREE;
+    unset -v GIT_INDEX_FILE;
+
+    flutter build "${HOLOLENS_FLUTTER_PLATFORM:-web}" --target="${HOLOLENS_FLUTTER_TARGET:-lib/main.dart}"
+)
