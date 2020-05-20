@@ -1,6 +1,7 @@
 #!/bin/bash -e
 
 INPUT_TREE="${1?<input> required}"
+OUTPUT_PATH="build/${HOLOLENS_FLUTTER_PLATFORM:-web}"
 
 # redirect all output to stderr
 {
@@ -16,15 +17,20 @@ INPUT_TREE="${1?<input> required}"
   # process result
   if [ $build_status -ne 0 ]; then
     echo -e "\nflutter build failed with exit status ${build_status}"
-    exit
+    exit ${build_status}
+  fi
+
+  if [ ! -d  "${OUTPUT_PATH}" ]; then
+    echo -e "\n${OUTPUT_PATH} not found, build must have failed"
+    exit 1
   fi
 
   echo -e "\nflutter build completed successfully"
 
   # add output to git index
-  git add -f "build/${HOLOLENS_FLUTTER_PLATFORM:-web}"
+  git add -f "${OUTPUT_PATH}"
 
 } 1>&2
 
 # output tree hash
-git write-tree --prefix="build/${HOLOLENS_FLUTTER_PLATFORM:-web}"
+git write-tree --prefix="${OUTPUT_PATH}"
