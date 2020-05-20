@@ -7,6 +7,7 @@ pkg_license=("MIT")
 pkg_deps=(
   core/bash
   jarvus/flutter
+  jarvus/hologit
 )
 
 pkg_bin_dirs=(bin)
