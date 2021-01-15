@@ -1,12 +1,12 @@
 pkg_name=lens-flutter
 pkg_origin=holo
-pkg_version="1.0"
+pkg_version="1.23.0-18.1.pre"
 pkg_maintainer="Chris Alfano <chris@jarv.us>"
 pkg_license=("MIT")
 
 pkg_deps=(
   core/bash
-  jarvus/flutter
+  jarvus/flutter/1.23.0-18.1.pre
   jarvus/hologit
 )
 
